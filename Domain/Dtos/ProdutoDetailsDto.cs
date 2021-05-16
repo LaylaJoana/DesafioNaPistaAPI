@@ -18,7 +18,7 @@ namespace Domain.Dtos
         public int QtdeEstoque { get; set; }
 
         [JsonProperty("data_ultima_venda")]
-        public DateTime DataUltimaVenda { get; set; }
+        public DateTime? DataUltimaVenda { get; set; }
 
         [JsonProperty("valor_ultima_venda")]
         public double ValorUltimaVenda { get; set; }
