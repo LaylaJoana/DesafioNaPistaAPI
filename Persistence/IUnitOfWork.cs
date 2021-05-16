@@ -14,9 +14,10 @@ namespace Persistence
         Task Delete<TEntity>(int id) where TEntity : class;
         Task<TEntity> FindById<TEntity>(int id) where TEntity : class;
         Task<IQueryable<TEntity>> FindAll<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class;
+        DbSet<TEntity> DbSet<TEntity>() where TEntity : class;
         Task<IQueryable<TEntity>> Include<TEntity>(params Expression<Func<TEntity, object>>[] includeExpressions)
             where TEntity : class;        
-        Task Commit();
+        Task Commit();       
     }
     public class UnitOfWork : IUnitOfWork
     {
@@ -50,6 +51,10 @@ namespace Persistence
             return await Task.FromResult(_context.Set<TEntity>().Where(expression));
         }
 
+        public DbSet<TEntity> DbSet<TEntity>() where TEntity : class
+        {
+            return _context.Set<TEntity>();
+        }
         public async Task<IQueryable<TEntity>> Include<TEntity>(
             params Expression<Func<TEntity, object>>[] includeExpressions)
             where TEntity : class

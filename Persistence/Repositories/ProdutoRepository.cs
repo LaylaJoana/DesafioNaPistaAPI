@@ -1,5 +1,6 @@
 ﻿using Domain.Entitys;
 using Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,9 +27,11 @@ namespace Persistence.Repositories
 
         public async Task<Produto> Buscar(int id)
         {
-            return await _unitOfWork.FindById<Produto>(id);
+            return await Task.FromResult(_unitOfWork.DbSet<Produto>()
+                 .Include(p => p.Venda.OrderByDescending(a => a.Id).Take(1))
+                 .FirstOrDefault(a => a.Id == id));
         }
-                
+
         public async Task Delete(int id)
         {
             await _unitOfWork.Delete<Produto>(id);
