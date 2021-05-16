@@ -31,7 +31,7 @@ namespace Service.Servicies
 
             return produtoDto;
         }
-
+    
         public async Task<ProdutoDetailsDto> Buscar(int id)
         {
             var produto = await _repository.Buscar(id);
