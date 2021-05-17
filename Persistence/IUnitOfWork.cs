@@ -1,5 +1,4 @@
-﻿using Domain.Entitys;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
 using System;
 using System.Linq;
@@ -11,13 +10,14 @@ namespace Persistence
     public interface IUnitOfWork : IDisposable
     {
         Task<TEntity> Add<TEntity>(TEntity entity);
+        Task<TEntity> Update<TEntity>(TEntity entity);
         Task Delete<TEntity>(int id) where TEntity : class;
         Task<TEntity> FindById<TEntity>(int id) where TEntity : class;
         Task<IQueryable<TEntity>> FindAll<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class;
         DbSet<TEntity> DbSet<TEntity>() where TEntity : class;
         Task<IQueryable<TEntity>> Include<TEntity>(params Expression<Func<TEntity, object>>[] includeExpressions)
             where TEntity : class;        
-        Task Commit();       
+        Task Commit();
     }
     public class UnitOfWork : IUnitOfWork
     {
@@ -31,6 +31,12 @@ namespace Persistence
         public async Task<TEntity> Add<TEntity>(TEntity entity)
         {
             await _context.AddAsync(entity);
+            await Commit();
+            return entity;
+        }
+        public async Task<TEntity> Update<TEntity>(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
             await Commit();
             return entity;
         }

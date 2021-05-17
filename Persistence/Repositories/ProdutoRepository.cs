@@ -28,8 +28,18 @@ namespace Persistence.Repositories
         public async Task<Produto> Buscar(int id)
         {
             return await Task.FromResult(_unitOfWork.DbSet<Produto>()
-                 .Include(p => p.Venda.OrderByDescending(a => a.Id).Take(1))
+                 .Include(p => p.Venda)
                  .FirstOrDefault(a => a.Id == id));
+        }
+
+        public async Task<Produto> BuscarSingle(int id)
+        {
+            return await _unitOfWork.FindById<Produto>(id);
+        }
+
+        public async Task Atualizar(Produto produto)
+        {
+            await _unitOfWork.Update(produto);
         }
 
         public async Task Delete(int id)
