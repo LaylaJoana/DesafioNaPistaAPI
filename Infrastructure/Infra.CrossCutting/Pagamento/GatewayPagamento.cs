@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Infrastructure.GatewayPagamento
+namespace Infra.CrossCutting.GatewayPagamento
 {
     public class GatewayPagamento
     {

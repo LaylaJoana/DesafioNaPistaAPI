@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Pagamento
+﻿namespace Infra.CrossCutting.Pagamento
 {
     public static class Util
     {

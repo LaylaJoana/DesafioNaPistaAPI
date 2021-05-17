@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Infra.CrossCutting</AssemblyName>
+    <RootNamespace>Infra.CrossCutting</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
