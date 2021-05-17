@@ -31,7 +31,7 @@ namespace Service.Servicies
 
             return produtoDto;
         }
-    
+
         public async Task<ProdutoDetailsDto> Buscar(int id)
         {
             var produto = await _repository.Buscar(id);
@@ -39,7 +39,7 @@ namespace Service.Servicies
             if (produto == null)
                 throw new NullReferenceException();
 
-            Venda ultimaVenda = produto.Venda.FirstOrDefault();
+            Venda ultimaVenda = produto.Venda.OrderByDescending(a => a.Id).FirstOrDefault();
 
             var produtoDetails = new ProdutoDetailsDto
             {
