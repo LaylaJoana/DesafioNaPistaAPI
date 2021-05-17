@@ -8,3 +8,6 @@
 /Infrastructure/obj
 /Persistence/obj
 /Service/obj
+/Domain/bin/Debug/netcoreapp3.1
+/Application/bin/Debug/netcoreapp3.1
+/Infra.Mapping/bin/Debug/netcoreapp3.1
