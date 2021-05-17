@@ -2,7 +2,7 @@
 
 namespace Domain.Dtos
 {
-    public class PagamentoDto
+    public class PagamentoResponseDto
     {
         [JsonProperty("valor")]  
         public double Valor { get; set; }

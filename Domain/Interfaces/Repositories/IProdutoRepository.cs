@@ -9,6 +9,8 @@ namespace Domain.Interfaces.Repositories
         Task<Produto> Salvar(Produto produto);
         Task<IQueryable<Produto>> BuscarTodos();
         Task<Produto> Buscar(int id);
+        Task<Produto> BuscarSingle(int id);        
         Task Delete(int id);
+        Task Atualizar(Produto produto);
     }
 }
