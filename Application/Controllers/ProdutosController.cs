@@ -75,7 +75,7 @@ namespace Application.Controllers
                 var Produto = await _produtoService.Buscar(id);
                 return new JsonResult(Produto);
             }
-            catch(System.Exception ex)
+            catch (System.Exception)
             {
                 return BadRequest("Ocorreu um erro desconhecido.");
             }
