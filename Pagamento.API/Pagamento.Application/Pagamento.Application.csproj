@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InfraPagamento.Mapping\Pagamento.Infra.Mapping.csproj" />
     <ProjectReference Include="..\Pagamento.Domain\Pagamento.Domain.csproj" />
     <ProjectReference Include="..\Pagamento.Infra.Mapping\Pagamento.Infra.Mapping.csproj" />
   </ItemGroup>

@@ -1,13 +1,14 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pagamento.Domain.PagamentoDto
 {
     public class PagamentoRequestDto
     {
-        [JsonProperty(PropertyName = "valor")]
+        [Required]
         public double Valor { get; set; }
 
-        [JsonProperty(PropertyName = "cartao")]
+        [Required]
         public CartaoDto Cartao { get; set; }
     }
 }

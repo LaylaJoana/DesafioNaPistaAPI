@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,8 @@ using Pagamento.Infra.Mapping;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mime;
 using System.Reflection;
 
 namespace Pagamento.Application
@@ -23,7 +26,17 @@ namespace Pagamento.Application
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().ConfigureApiBehaviorOptions(options =>
+            {
+                options.InvalidModelStateResponseFactory = _ =>
+                {
+                    var result = new BadRequestObjectResult("Os valores informados não são válidos.");
+                    result.ContentTypes.Add(MediaTypeNames.Application.Json);
+                    result.StatusCode = (int)HttpStatusCode.PreconditionFailed;
+
+                    return result;
+                };
+            });
 
             services.AddSwaggerGen(c =>
             {

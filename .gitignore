@@ -11,3 +11,5 @@
 /Pagamento.API/Pagamento.Infra.Mapping/bin/Debug/netcoreapp3.1
 /Pagamento.API/Pagamento.Infra.Mapping/obj
 /Pagamento.API/Pagamento.Service/obj
+/Pagamento.API/Pagamento.Domain/bin/Debug/netcoreapp3.1
+/Pagamento.API/Pagamento.Service/bin/Debug/netcoreapp3.1
