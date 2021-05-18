@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Application
 {
@@ -37,6 +39,10 @@ namespace Application
                     }
                 });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
            services.SetupMappingLayer(Configuration);
