@@ -3,3 +3,11 @@
 ################################################################################
 
 /Compra.API/.vs/Compra.API
+/Pagamento.API/InfraPagamento.Mapping/obj
+/Pagamento.API/.vs/Pagamento.API
+/Pagamento.API/Pagamento.Application/bin/Debug/netcoreapp3.1
+/Pagamento.API/Pagamento.Application/obj
+/Pagamento.API/Pagamento.Domain/obj
+/Pagamento.API/Pagamento.Infra.Mapping/bin/Debug/netcoreapp3.1
+/Pagamento.API/Pagamento.Infra.Mapping/obj
+/Pagamento.API/Pagamento.Service/obj
