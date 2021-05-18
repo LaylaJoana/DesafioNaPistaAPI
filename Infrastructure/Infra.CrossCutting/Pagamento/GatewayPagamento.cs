@@ -10,12 +10,9 @@ namespace Infra.CrossCutting.GatewayPagamento
     public class GatewayPagamento
     {
         private readonly IConfiguration _configuration;
-        private readonly HttpClient _httpClient;
-
-        public GatewayPagamento(IConfiguration configuration, IHttpClientFactory httpClient)
+        public GatewayPagamento(IConfiguration configuration)
         {
             _configuration = configuration;
-            _httpClient = httpClient.CreateClient();
         }
 
         public async Task<PagamentoResponseDto> AutorizarPagamento(PagamentoRequestDto pagamentoRequest)
@@ -27,11 +24,15 @@ namespace Infra.CrossCutting.GatewayPagamento
 
             var json = JsonSerializer.Serialize(pagamentoRequest);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-
+            var _httpClient = new HttpClient();
             var response = _httpClient.PostAsync(url, stringContent).ContinueWith(http =>
             {
-                var result = http.Result.Content.ReadAsStringAsync().Result;
-                pagamentoDto = JsonSerializer.Deserialize<PagamentoResponseDto>(result);
+                if (http.Status == TaskStatus.RanToCompletion)
+                {
+                    var result = http.Result.Content.ReadAsStringAsync().Result;
+                    pagamentoDto = JsonSerializer.Deserialize<PagamentoResponseDto>(result,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
             });
 
             await response;
