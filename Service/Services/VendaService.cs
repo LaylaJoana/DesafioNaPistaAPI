@@ -2,7 +2,9 @@
 using Domain.Entitys;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Infra.CrossCutting.GatewayPagamento;
 using Infra.CrossCutting.Pagamento;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
@@ -12,10 +14,13 @@ namespace Service.Services
     {
         private readonly IVendaRepository _repository;
         private readonly IProdutoRepository _repositoryProduto;
-        public VendaService(IVendaRepository repository, IProdutoRepository repositoryProduto)
+        private readonly IConfiguration _configuration;
+
+        public VendaService(IVendaRepository repository, IProdutoRepository repositoryProduto, IConfiguration configuration)
         {
             _repository = repository;
             _repositoryProduto = repositoryProduto;
+            _configuration = configuration;
         }
 
         public async Task<VendaDto> Salvar(VendaDto vendaDto)
@@ -32,7 +37,8 @@ namespace Service.Services
                 throw new Exception();
             }
 
-            //await Autorizar Pagamento
+            var valorCompra = vendaDto.QtdeComprada * produto.ValorUnitario;
+            await AutorizarPagamento(vendaDto.Cartao, valorCompra);
 
             var venda = new Venda
             {
@@ -64,6 +70,22 @@ namespace Service.Services
             }
 
             return true;
+        }
+
+        private async Task AutorizarPagamento(CartaoDto cartaoDto, double valor)
+        {
+            var pagamentoSem = new PagamentoRequestDto
+            {
+                Cartao = cartaoDto,
+                Valor = valor
+            };
+            var gatewayPagamento = new GatewayPagamento(_configuration);
+            var autorizarPagamento = await gatewayPagamento.AutorizarPagamento(pagamentoSem);
+
+            if (autorizarPagamento == null || !autorizarPagamento.Estado.Equals("APROVADO"))
+            {
+                throw new Exception();
+            }
         }
     }
 }
