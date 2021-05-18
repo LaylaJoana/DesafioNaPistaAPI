@@ -11,3 +11,13 @@
 /Domain/bin/Debug/netcoreapp3.1
 /Application/bin/Debug/netcoreapp3.1
 /Infra.Mapping/bin/Debug/netcoreapp3.1
+/Infra.CrossCutting/bin/Debug/netcoreapp3.1
+/Infra.CrossCutting/obj/Debug/netcoreapp3.1
+/Infra.CrossCutting/obj
+/Infra.Mapping/obj
+/Persistence/bin/Debug/netcoreapp3.1
+/Service/bin/Debug/netcoreapp3.1
+/Infrastructure/Infra.CrossCutting/bin/Debug/netcoreapp3.1
+/Infrastructure/Infra.CrossCutting/obj
+/Infrastructure/Infra.Mapping/bin/Debug/netcoreapp3.1
+/Infrastructure/Infra.Mapping/obj
