@@ -1,19 +1,17 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Dtos
 {
     public class VendaDto
     {
-        [JsonProperty("id")]
+      
         public int? Id { get; set; }
-
-        [JsonProperty("produto_id")]
+        [Required]
         public int ProdutoId { get; set; }
-
-        [JsonProperty("qtde_comprada")]
+        [Range(0, int.MaxValue)]
         public int QtdeComprada { get; set; }
-
-        [JsonProperty("cartao")]
+        [Required]
         public CartaoDto Cartao { get; set; }
     }
 }

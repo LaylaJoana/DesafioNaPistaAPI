@@ -1,22 +1,17 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Dtos
 {
     public class CartaoDto
     {
-        [JsonProperty("titular")]
+
+        [Required]
         public string Titular { get; set; }
-
-        [JsonProperty("numero")]
-        public string Numero { get; set; }
-
-        [JsonProperty("data_expiracao")]
+        [Required]
+        public string Numero { get; set; }  
         public string DataExpiracao { get; set; }
-
-        [JsonProperty("bandeira")]
         public string Bandeira { get; set; }
-
-        [JsonProperty("cvv")]
         public string Cvv { get; set; }
     }
 }
